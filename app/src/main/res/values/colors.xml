@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#fff</color>
+    <color name="feed_bg">#d3d6db</color>
+    <color name="feed_item_bg">#fff</color>
+    <color name="feed_item_border">#c2c3c8</color>
+    <color name="timestamp">#a0a3a7</color>
+</resources>
