@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github.anthonyeef.xiukoo.R;
+import io.github.anthonyeef.xiukoo.adapter.FeedItemAdapter;
 import io.github.anthonyeef.xiukoo.model.FeedItem;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         list.setLayoutManager(llm);
 
-
-
+        FeedItemAdapter feedItemAdapter = new FeedItemAdapter(parseFeedItem(URL));
+        list.setAdapter(feedItemAdapter);
     }
 
     @Override
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
     public ArrayList<FeedItem> parseFeedItem(String href) {
         ArrayList<FeedItem> feedItemList = new ArrayList<FeedItem>();
