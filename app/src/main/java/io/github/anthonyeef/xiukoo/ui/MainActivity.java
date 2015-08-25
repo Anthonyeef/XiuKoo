@@ -10,14 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github.anthonyeef.xiukoo.model.FeedItem;
-import io.github.anthonyeef.xiukoo.adapter.FeedListAdapter;
 import io.github.anthonyeef.xiukoo.R;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private ListView listView;
-    private FeedListAdapter listAdapter;
     private List<FeedItem> feedItems;
 
     private String URL = "http://www.xiukoo.org";
@@ -29,9 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.list);
         feedItems = new ArrayList<FeedItem>();
-        listAdapter = new FeedListAdapter(this, feedItems);
-        listView.setAdapter(listAdapter);
-        
+
     }
 
     @Override

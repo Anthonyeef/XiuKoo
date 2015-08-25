@@ -4,7 +4,7 @@ package io.github.anthonyeef.xiukoo.model;
  * Created by anthonyeef on 8/22/15.
  */
 public class FeedItem {
-    private String title, name, source, content, imageUrl, postTime;
+    private String title, name, source, content, postTime;
 
     public FeedItem() {
 
@@ -16,7 +16,6 @@ public class FeedItem {
         this.name = name;
         this.source = source;
         this.content = content;
-        this.imageUrl = imageUrl;
         this.postTime = postTime;
     }
 
@@ -52,13 +51,6 @@ public class FeedItem {
         this.content = content;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 
     public String getPostTime() {
         return postTime;
