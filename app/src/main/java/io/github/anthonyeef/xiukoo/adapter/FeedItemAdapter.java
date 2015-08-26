@@ -36,6 +36,7 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedVi
         feedViewHolder.vName.setText(feedItemList.get(i).getName());
         feedViewHolder.vSource.setText(feedItemList.get(i).getSource());
         feedViewHolder.vTimestamp.setText(feedItemList.get(i).getPostTime());
+        feedViewHolder.vContent.setText(feedItemList.get(i).getContent());
     }
     @Override
     public FeedViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -50,6 +51,7 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedVi
         protected TextView vName;
         protected TextView vSource;
         protected TextView vTimestamp;
+        protected TextView vContent;
 
         public FeedViewHolder(View v) {
             super(v);
@@ -57,6 +59,7 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedVi
             vName = (TextView) v.findViewById(R.id.txtName);
             vSource = (TextView) v.findViewById(R.id.txtSource);
             vTimestamp = (TextView) v.findViewById(R.id.timestamp);
+            vContent = (TextView) v.findViewById(R.id.content);
         }
     }
 }

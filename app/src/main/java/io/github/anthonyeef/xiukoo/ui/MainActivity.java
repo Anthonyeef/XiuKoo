@@ -95,35 +95,39 @@ public class MainActivity extends AppCompatActivity {
         try {
             Document doc = Jsoup.parse(resource);
             Element masthead = doc.select("div.tie-wrapper").first();
-            Elements feedBox = masthead.select("div.tie-box");
+            Elements feedBoxs = masthead.select("div.tie-box");
 
-            Elements titleElements = feedBox.select("div.tie-header h2.tie-title a");
+            Elements userInfo = feedBoxs.select("div.tie-content div.tie-user div.user-info");
+            Elements contentInfo = feedBoxs.select("div.tie-content p.content");
 
-            Elements userInfo = feedBox.select("div.tie-content div.tie-user div.user-info");
-
+            Elements titleElements = feedBoxs.select("div.tie-header h2.tie-title a");
             Elements nameElements = userInfo.select("p span.user-name");
             Elements sourceElements = userInfo.select("p span.user-form");
-
             Elements timestampElements = userInfo.select("p.tie-date");
 
 
-            for (int i = 0; i < feedBox.size(); i++) {
+
+            for (int i = 0; i < feedBoxs.size(); i++) {
                 FeedItem feedItem = new FeedItem();
 
                 Element titleElement = titleElements.get(i);
                 Element nameElement = nameElements.get(i);
                 Element sourceElement = sourceElements.get(i);
                 Element timestampElement = timestampElements.get(i);
+                Element contentElement = contentInfo.get(i);
+
 
                 String title = titleElement.text();
                 String name = nameElement.text();
                 String source = sourceElement.text();
                 String timestamp = timestampElement.text();
+                String content = contentElement.text();
 
                 feedItem.setTitle(title);
                 feedItem.setName(name);
                 feedItem.setPostTime(timestamp);
                 feedItem.setSource(source);
+                feedItem.setContent(content);
 
                 mFeedItems.add(feedItem);
             }

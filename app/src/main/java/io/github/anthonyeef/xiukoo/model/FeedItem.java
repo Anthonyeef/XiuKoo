@@ -10,7 +10,7 @@ public class FeedItem {
 
     }
 
-    public FeedItem(String title, String name, String source, String content, String imageUrl, String postTime) {
+    public FeedItem(String title, String name, String source, String content, String postTime) {
         super();
         this.title = title;
         this.name = name;
