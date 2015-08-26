@@ -1,5 +1,6 @@
 package io.github.anthonyeef.xiukoo.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +18,11 @@ import io.github.anthonyeef.xiukoo.model.FeedItem;
 public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedViewHolder>{
 
     private List<FeedItem> feedItemList;
+    private Context mContext;
 
-    public FeedItemAdapter(List<FeedItem> feedItemList) {
+    public FeedItemAdapter(Context context,List<FeedItem> feedItemList) {
         this.feedItemList = feedItemList;
+        this.mContext = context;
     }
 
     @Override

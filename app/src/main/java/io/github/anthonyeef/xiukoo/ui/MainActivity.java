@@ -6,7 +6,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.StringRequest;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -14,34 +19,54 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import io.github.anthonyeef.xiukoo.R;
 import io.github.anthonyeef.xiukoo.adapter.FeedItemAdapter;
+import io.github.anthonyeef.xiukoo.app.AppController;
 import io.github.anthonyeef.xiukoo.model.FeedItem;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private ListView listView;
-    private List<FeedItem> feedItems;
-
-    private String URL = "http://www.xiukoo.org";
+    private RecyclerView mRecyclerView;
+    private FeedItemAdapter mFeedItemAdapter;
+    private ArrayList<FeedItem> mFeedItems;
+    public static final String url = "http://www.xiukoo.org";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView list = (RecyclerView) findViewById(R.id.list);
-        list.setHasFixedSize(true);
+        mRecyclerView = (RecyclerView) findViewById(R.id.list);
+        mFeedItems = new ArrayList<>();
+
+        mFeedItemAdapter = new FeedItemAdapter(this, mFeedItems);
+
+        mRecyclerView.setAdapter(mFeedItemAdapter);
+        mRecyclerView.setHasFixedSize(true);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        list.setLayoutManager(llm);
+        mRecyclerView.setLayoutManager(llm);
 
-        FeedItemAdapter feedItemAdapter = new FeedItemAdapter(parseFeedItem(URL));
-        list.setAdapter(feedItemAdapter);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+
+
+        StringRequest req = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response != null) {
+                   parseFeedItem(response);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error:", error.getMessage());
+            }
+        });
+
+        AppController.getInstance().addToRequestQueue(req, TAG);
     }
 
     @Override
@@ -66,21 +91,29 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-    public ArrayList<FeedItem> parseFeedItem(String href) {
-        ArrayList<FeedItem> feedItemList = new ArrayList<FeedItem>();
+    private void parseFeedItem(String resource) {
         try {
+            Document doc = Jsoup.parse(resource);
+            Element masthead = doc.select("div.tie-wrapper").first();
+            Elements feedBox = masthead.select("div.tie-box");
 
-            Document doc = Jsoup.connect(href).timeout(10000).get();
-            Elements feedBox = doc.select("div.tie-box");
+            Elements titleElements = feedBox.select("div.tie-header h2.tie-title a");
+
+            Elements userInfo = feedBox.select("div.tie-content div.tie-user div.user-info");
+
+            Elements nameElements = userInfo.select("p span.user-name");
+            Elements sourceElements = userInfo.select("p span.user-form");
+
+            Elements timestampElements = userInfo.select("p.tie-date");
+
 
             for (int i = 0; i < feedBox.size(); i++) {
                 FeedItem feedItem = new FeedItem();
-                Element feedElement = feedBox.get(i);
-                Element titleElement = feedElement.select("h2.tie-title").first();
-                Element nameElement = feedElement.select("span.user-name").first();
-                Element sourceElement = feedElement.select("span.user-from").first();
-                Element timestampElement = feedElement.select("p.tie-date").first();
+
+                Element titleElement = titleElements.get(i);
+                Element nameElement = nameElements.get(i);
+                Element sourceElement = sourceElements.get(i);
+                Element timestampElement = timestampElements.get(i);
 
                 String title = titleElement.text();
                 String name = nameElement.text();
@@ -92,10 +125,11 @@ public class MainActivity extends AppCompatActivity {
                 feedItem.setPostTime(timestamp);
                 feedItem.setSource(source);
 
+                mFeedItems.add(feedItem);
             }
         }catch (Exception e) {
             e.printStackTrace();
         }
-        return feedItemList;
+        mFeedItemAdapter.notifyDataSetChanged();
     }
 }
