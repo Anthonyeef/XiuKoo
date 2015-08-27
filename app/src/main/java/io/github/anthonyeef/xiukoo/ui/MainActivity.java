@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -33,10 +34,16 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<FeedItem> mFeedItems;
     public static final String url = "http://www.xiukoo.org";
 
+    private Toolbar mToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mToolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(mToolbar);
+
 
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
         mFeedItems = new ArrayList<>();

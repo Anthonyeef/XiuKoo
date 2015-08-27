@@ -8,4 +8,14 @@
     <color name="source">#a0a3a7</color>
     <color name="name">#a0a3a7</color>
 
+    <color name="colorPrimary">#FF9800</color>
+    <color name="colorPrimaryDark">#F57F17</color>
+    <color name="colorPrimaryLight">#FFF59D</color>
+    <color name="colorAccent">#FDD835</color>
+    <color name="colorTextPrimary">#F57F17</color>
+    <color name="colorTextSecondary">#FFF59D</color>
+
+    <color name="orange">#FF9900</color>
+    <color name="green">#009900</color>
+    <color name="blue">#000099</color>
 </resources>
