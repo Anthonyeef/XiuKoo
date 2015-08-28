@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
             Elements nameElements = userInfo.select("p span.user-name");
             Elements sourceElements = userInfo.select("p span.user-form");
             Elements timestampElements = userInfo.select("p.tie-date");
+            Elements imageElements = ;
 
 
 
@@ -122,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 Element sourceElement = sourceElements.get(i);
                 Element timestampElement = timestampElements.get(i);
                 Element contentElement = contentInfo.get(i);
+                Element imageElement = imageElements.get(i);
 
 
                 String title = titleElement.text();
@@ -129,12 +131,15 @@ public class MainActivity extends AppCompatActivity {
                 String source = sourceElement.text();
                 String timestamp = timestampElement.text();
                 String content = contentElement.text();
+                String image = imageElement.text();
 
                 feedItem.setTitle(title);
                 feedItem.setName(name);
                 feedItem.setPostTime(timestamp);
                 feedItem.setSource(source);
                 feedItem.setContent(content);
+                feedItem.setImage(image);
+
 
                 mFeedItems.add(feedItem);
             }
