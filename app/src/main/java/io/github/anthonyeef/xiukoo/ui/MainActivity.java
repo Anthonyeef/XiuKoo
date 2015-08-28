@@ -116,12 +116,18 @@ public class MainActivity extends AppCompatActivity {
                 Element sourceElement = feedPost.select("div.tie-content div.tie-user div.user-info p span.user-form").first();
                 Element timestampElement = feedPost.select("div.tie-content div.tie-user div.user-info p.tie-date").first();
                 Elements imageElement = feedPost.select("div.tie-content img.st-photo");
+                Elements contentElements = feedPost.select("div.tie-content p:not(.tie-date):gt(0)");
 
 
                 String title = titleElement.text();
                 String name = nameElement.text();
                 String source = sourceElement.text();
                 String timestamp = timestampElement.text();
+
+                String content = "";
+                for (int j = 0; j< contentElements.size(); j++) {
+                    content = content + contentElements.get(j).text() + "\n";
+                }
 
                 String image;
                 if (imageElement.attr("src") != ""){
@@ -135,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
                 feedItem.setPostTime(timestamp);
                 feedItem.setSource(source);
                 feedItem.setImage(image);
+                feedItem.setContent(content);
 
                 mFeedItems.add(feedItem);
             }
