@@ -38,6 +38,9 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedVi
 
     @Override
     public void onBindViewHolder(FeedViewHolder feedViewHolder, int i) {
+        if (imageLoader == null) {
+            imageLoader = AppController.getInstance().getImageLoader();
+        }
         feedViewHolder.vTitle.setText(feedItemList.get(i).getTitle());
         feedViewHolder.vName.setText(feedItemList.get(i).getName());
         feedViewHolder.vSource.setText(feedItemList.get(i).getSource());
@@ -45,12 +48,12 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedVi
         feedViewHolder.vContent.setText(feedItemList.get(i).getContent());
 
         if (feedItemList.get(i).getImage() == null){
-            feedViewHolder.vImageView.setVisibility(View.GONE);
+            feedViewHolder.vImage.setVisibility(View.GONE);
         }else {
-            feedViewHolder.vImageView.setImageUrl(feedItemList.get(i).getImage(), imageLoader);
-            feedViewHolder.vImageView.setVisibility(View.VISIBLE);
+            feedViewHolder.vImage.setImageUrl(feedItemList.get(i).getImage(), imageLoader);
+            feedViewHolder.vImage.setVisibility(View.VISIBLE);
 
-            feedViewHolder.vImageView.setResponseObserver(new FeedImageView.ResponseObserver() {
+            feedViewHolder.vImage.setResponseObserver(new FeedImageView.ResponseObserver() {
                 @Override
                 public void onError() {
                     Log.e("ImageView Error", "遭辣，图片加载不出来辣！");
@@ -58,7 +61,7 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedVi
 
                 @Override
                 public void onSuccess() {
-                    Log.d("ImageView Success", "Yeah here is the image.");
+
                 }
             });
         }
@@ -77,7 +80,7 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedVi
         protected TextView vSource;
         protected TextView vTimestamp;
         protected TextView vContent;
-        protected FeedImageView vImageView;
+        protected FeedImageView vImage;
 
         public FeedViewHolder(View v) {
             super(v);
@@ -86,7 +89,7 @@ public class FeedItemAdapter extends RecyclerView.Adapter<FeedItemAdapter.FeedVi
             vSource = (TextView) v.findViewById(R.id.txtSource);
             vTimestamp = (TextView) v.findViewById(R.id.timestamp);
             vContent = (TextView) v.findViewById(R.id.content);
-            vImageView = (FeedImageView) v.findViewById(R.id.feedImage);
+            vImage = (FeedImageView) v.findViewById(R.id.feedImage);
 
 
         }

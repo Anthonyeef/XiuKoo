@@ -104,42 +104,37 @@ public class MainActivity extends AppCompatActivity {
             Element masthead = doc.select("div.tie-wrapper").first();
             Elements feedBoxs = masthead.select("div.tie-box");
 
-            Elements userInfo = feedBoxs.select("div.tie-content div.tie-user div.user-info");
-            Elements contentInfo = feedBoxs.select("div.tie-content p.content ");
+            for(int i = 0; i< feedBoxs.size(); i++) {
 
-            Elements titleElements = feedBoxs.select("div.tie-header h2.tie-title a");
-            Elements nameElements = userInfo.select("p span.user-name");
-            Elements sourceElements = userInfo.select("p span.user-form");
-            Elements timestampElements = userInfo.select("p.tie-date");
-            Elements imageElements = ;
-
-
-
-            for (int i = 0; i < feedBoxs.size(); i++) {
                 FeedItem feedItem = new FeedItem();
 
-                Element titleElement = titleElements.get(i);
-                Element nameElement = nameElements.get(i);
-                Element sourceElement = sourceElements.get(i);
-                Element timestampElement = timestampElements.get(i);
-                Element contentElement = contentInfo.get(i);
-                Element imageElement = imageElements.get(i);
+                Element feedPost = feedBoxs.get(i);
+
+                Element titleElement = feedPost.select("div.tie-header h2.tie-title a").first();
+
+                Element nameElement = feedPost.select("div.tie-content div.tie-user div.user-info p span.user-name").first();
+                Element sourceElement = feedPost.select("div.tie-content div.tie-user div.user-info p span.user-form").first();
+                Element timestampElement = feedPost.select("div.tie-content div.tie-user div.user-info p.tie-date").first();
+                Elements imageElement = feedPost.select("div.tie-content img.st-photo");
 
 
                 String title = titleElement.text();
                 String name = nameElement.text();
                 String source = sourceElement.text();
                 String timestamp = timestampElement.text();
-                String content = contentElement.text();
-                String image = imageElement.text();
+
+                String image;
+                if (imageElement.attr("src") != ""){
+                    image = url + imageElement.attr("src");
+                }else {
+                    image = null;
+                }
 
                 feedItem.setTitle(title);
                 feedItem.setName(name);
                 feedItem.setPostTime(timestamp);
                 feedItem.setSource(source);
-                feedItem.setContent(content);
                 feedItem.setImage(image);
-
 
                 mFeedItems.add(feedItem);
             }
