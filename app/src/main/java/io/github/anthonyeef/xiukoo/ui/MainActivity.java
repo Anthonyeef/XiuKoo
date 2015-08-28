@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
             Elements feedBoxs = masthead.select("div.tie-box");
 
             Elements userInfo = feedBoxs.select("div.tie-content div.tie-user div.user-info");
-            Elements contentInfo = feedBoxs.select("div.tie-content p.content");
+            Elements contentInfo = feedBoxs.select("div.tie-content p.content ");
 
             Elements titleElements = feedBoxs.select("div.tie-header h2.tie-title a");
             Elements nameElements = userInfo.select("p span.user-name");
