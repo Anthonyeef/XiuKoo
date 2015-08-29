@@ -8,6 +8,11 @@
 
 特别感谢 GDG南阳，感谢[菜鸟饭团](http://www.gdgny.org/series/androidfan)提供的帮助。
 
+#源代码在 GPLv 协议下发布
+--- 
+
+[LICENCE](https://github.com/Anthonyeef/XiuKoo/blob/master/LICENSE)
+
 
 
 
