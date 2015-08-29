@@ -8,6 +8,8 @@
 
 功能上非常简单，代码也十分直观易读。用 Volley 读取了页面源代码，用 Jsoup 进行解析和简单的排版处理。解析规则在 MainActivity 里可以看到。使用了 Design Library 的 CardView 和 RecyclerView 来处理列表和样式。
 
+感谢V友@[BillowSky](https://www.v2ex.com/member/BillowSky)做了一个这么好玩的网页 :doge:
+
 特别感谢 GDG南阳，感谢[菜鸟饭团](http://www.gdgny.org/series/androidfan)提供的帮助。
 
 #源代码在 GPLv 协议下发布
