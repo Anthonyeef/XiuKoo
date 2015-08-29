@@ -1,4 +1,4 @@
- [绣口网](http://www.xiukoo.org) 的 Android 客户端。一个网络访问以及图片加载，还有 RecyclerView 的练习作品。
+ [绣口网](http://www.xiukoo.org) 的第三方 Android 客户端。一个网络访问以及图片加载，还有 RecyclerView 的练习作品。
 
 使用了 Volley 和 Jsoup 库，抓取了绣口网上的数据内容。
 
