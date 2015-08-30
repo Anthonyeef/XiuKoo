@@ -5,10 +5,7 @@ import android.text.TextUtils;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
-
-import io.github.anthonyeef.xiukoo.volley.LruBitmapCache;
 
 /**
  * Created by anthonyeef on 8/25/15.
@@ -17,8 +14,6 @@ public class AppController extends Application{
     public static final String TAG = AppController.class.getSimpleName();
 
     private RequestQueue mRequestQueue;
-    private ImageLoader mImageLoader;
-    LruBitmapCache mLruBitmapCache;
 
 
     private static AppController mInstance;
@@ -39,22 +34,6 @@ public class AppController extends Application{
         }
 
         return mRequestQueue;
-    }
-
-    public ImageLoader getImageLoader() {
-        getRequestQueue();
-        if (mImageLoader == null) {
-            getLruBitmapCache();
-            mImageLoader = new ImageLoader(this.mRequestQueue, mLruBitmapCache);
-        }
-        return this.mImageLoader;
-    }
-
-    public LruBitmapCache getLruBitmapCache() {
-        if (mLruBitmapCache == null) {
-            mLruBitmapCache = new LruBitmapCache();
-        }
-        return mLruBitmapCache;
     }
 
 
