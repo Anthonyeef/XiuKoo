@@ -14,8 +14,6 @@
 #直接下载
 点击[这里](http://fir.im/d4g9)
 
-或者扫描二维码：
-![QR Code](http://7vijxa.com1.z0.glb.clouddn.com/Screen%20Shot%202015-09-02%20at%2016.14.52.png)
 #Update
 V 1.01
 
